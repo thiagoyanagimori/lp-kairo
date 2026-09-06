@@ -955,14 +955,14 @@ document.body.addEventListener('click', (e)=>{
 
 /* Scrollspy: highlight Sobre / Catálogo in the header while on the home page */
 const navLinks = [...document.querySelectorAll('nav.main-nav a[data-scroll]')];
-const spySections = ['sobre','produtos'].map(id=>document.getElementById(id)).filter(Boolean);
+const spySections = ['sobre','produtos','junte-se'].map(id=>document.getElementById(id)).filter(Boolean);
 const spy = new IntersectionObserver((entries)=>{
   entries.forEach(en=>{
     if(en.isIntersecting){
       navLinks.forEach(a=> a.classList.toggle('active', a.dataset.scroll===en.target.id));
     }
   });
-},{rootMargin:'-45% 0px -50% 0px'});
+},{rootMargin:'-35% 0px -10% 0px'});
 spySections.forEach(s=>spy.observe(s));
 
 /* ---------------- RENDER CARDS ---------------- */
