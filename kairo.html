@@ -211,7 +211,17 @@
   /* ---------- SECTION SHELL ---------- */
   section.block{padding:120px 0;}
   #sobre, #produtos{scroll-margin-top:96px;}
-  @media(max-width:900px){ section.block{padding:76px 0;} }
+  @media(max-width:900px){ section.block{padding:76px 20px;} }
+  @media(max-width:700px){ section.block{padding:56px 20px;} }
+  @media(max-width:700px){
+    .manifesto{display:flex;flex-direction:column;gap:0;}
+    .manifesto-copy{display:contents;}
+    .manifesto-copy .kicker{order:1;margin:0;}
+    .manifesto-img{order:2;width:100%;margin-bottom:32px;}
+    .manifesto-copy h2{order:3;margin-bottom:20px;}
+    .manifesto-copy p.body-text{order:4;}
+    .manifesto-stats{order:5;}
+  }
   .section-head{
     display:flex; justify-content:space-between; align-items:flex-end;
     margin-bottom:56px; gap:24px;
@@ -344,6 +354,7 @@
     display:block; font-size:13.5px; color:var(--stone); margin-bottom:11px; transition:color .2s;
   }
   .footer-col a:hover{color:var(--ink);}
+  .footer-brand img{display:block;width:220px;height:70px !important;object-fit:contain;object-position:left center;}
   .footer-brand p{font-size:13.5px; color:var(--stone); line-height:1.7; max-width:280px; margin-top:16px;}
   .footer-bottom{
     display:flex; justify-content:space-between; align-items:center;
@@ -523,6 +534,16 @@
   @media (prefers-reduced-motion: reduce){
     .marquee-track{animation:none;}
     .reveal{opacity:1; transform:none; transition:none;}
+  }
+  @media(max-width:700px){
+    .manifesto{display:flex;flex-direction:column;gap:0;}
+    .manifesto-copy{display:contents;}
+    .manifesto-copy .kicker{order:1;width:100%;margin:0 0 10px !important;text-align:left;}
+    .manifesto-img{order:2;width:100%;margin-bottom:32px;padding:0 16px;justify-content:center;}
+    .manifesto-img img{object-position:center center;}
+    .manifesto-copy h2{order:3;margin-bottom:20px;}
+    .manifesto-copy p.body-text{order:4;}
+    .manifesto-stats{order:5;}
   }
 </style>
 </head>
@@ -1142,6 +1163,17 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 /* ---------------- INIT ---------------- */
 renderShop();
 renderCart();
+</script>
+<script>
+  document.querySelectorAll('.logo-mark img, .footer-brand img').forEach(img => { img.src = 'logo.png'; });
+</script>
+<script>
+  const heroImage = document.querySelector('.hero img');
+  const desktopHeroSource = heroImage.getAttribute('src');
+  const mobileHeroQuery = window.matchMedia('(max-width:700px) and (orientation:portrait)');
+  const updateHeroSource = () => { heroImage.src = mobileHeroQuery.matches ? 'heromobile.png' : desktopHeroSource; };
+  updateHeroSource();
+  mobileHeroQuery.addEventListener('change', updateHeroSource);
 </script>
 </body>
 </html>
